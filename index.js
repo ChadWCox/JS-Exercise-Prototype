@@ -39,9 +39,39 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
+} 
 
+Person.prototype.eat = function(edible){
+  if(this.stomach.length < 10){
+    this.stomach.push(edible);
+  }
 }
+
+Person.prototype.poop = function(){
+  this.stomach = [];
+}
+
+Person.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+const personOne = new Person('Chad', 37);
+
+console.log(personOne.toString());
+
+personOne.eat('🍍');
+personOne.eat('🐌');
+personOne.eat('🥪');
+
+console.log(personOne.stomach);
+
+personOne.poop();
+
+console.log(personOne.stomach);
 
 /*
   TASK 2
@@ -57,9 +87,25 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = `tank`;
+  this.odometer = `odometer`;
 }
+
+Car.prototype.fill = function(gallons) {
+  return this.tank = `tank at ${gallons}`
+}
+
+const carOne = new Car(0, 0);
+
+console.log(carOne);
+
+carOne.fill(`17`);
+
+console.log(carOne.tank);
+
 
 /*
   TASK 3
@@ -68,9 +114,38 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(attributes, age,  favoriteToy) {
+  Person.call(this, attributes, age); 
+  this.favoriteToy = favoriteToy; // this will be a special attribute to Child
 }
+
+Baby.prototype = Object.create(Person.prototype);
+
+const liam = new Baby("Liam", 3, "cars");
+
+console.log(liam);
+
+liam.eat('Hamburger');
+liam.eat('Fries');
+liam.eat('Water');
+
+console.log(liam.stomach);
+
+liam.poop();
+
+Baby.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+console.log(liam.toString());
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}, ${this.favoriteToy} being the favorite toy.`
+}
+
+console.log(liam.play());
+
+
 
 /* 
   TASK 4
