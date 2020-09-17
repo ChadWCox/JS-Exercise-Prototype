@@ -125,15 +125,21 @@ const liam = new Baby("Liam", 3, "cars");
 
 console.log(liam);
 
+// @ts-ignore
 liam.eat('Hamburger');
+// @ts-ignore
 liam.eat('Fries');
+// @ts-ignore
 liam.eat('Water');
 
+// @ts-ignore
 console.log(liam.stomach);
 
+// @ts-ignore
 liam.poop();
 
 Baby.prototype.toString = function(){
+  // @ts-ignore
   return `${this.name}, ${this.age}`;
 }
 
@@ -151,10 +157,10 @@ console.log(liam.play());
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. When this is used in the global scope the value of this will be the window/console Object
+  2. when the .this calls a function the object before the . is this. - implicit bining
+  3. In new binding this refers to the object created in a constructor function. 
+  4. Whenever .call or .apply methods are used this is explicitly defind. 
 */
 
 
