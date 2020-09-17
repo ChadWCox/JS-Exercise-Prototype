@@ -59,7 +59,7 @@ Person.prototype.toString = function(){
   return `${this.name}, ${this.age}`;
 }
 
-const personOne = new Person('Liam', 4);
+const personOne = new Person('Chad', 37);
 
 console.log(personOne.toString());
 
@@ -104,7 +104,7 @@ console.log(carOne);
 
 carOne.fill(`17`);
 
-console.log(carOne.tank),
+console.log(carOne.tank);
 
 
 /*
@@ -114,9 +114,38 @@ console.log(carOne.tank),
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(attributes, age,  favoriteToy) {
+  Person.call(this, attributes, age); 
+  this.favoriteToy = favoriteToy; // this will be a special attribute to Child
 }
+
+Baby.prototype = Object.create(Person.prototype);
+
+const liam = new Baby("Liam", 3, "cars");
+
+console.log(liam);
+
+liam.eat('Hamburger');
+liam.eat('Fries');
+liam.eat('Water');
+
+console.log(liam.stomach);
+
+liam.poop();
+
+Baby.prototype.toString = function(){
+  return `${this.name}, ${this.age}`;
+}
+
+console.log(liam.toString());
+
+Baby.prototype.play = function(){
+  return `Playing with ${this.favoriteToy}, ${this.favoriteToy} being the favorite toy.`
+}
+
+console.log(liam.play());
+
+
 
 /* 
   TASK 4
