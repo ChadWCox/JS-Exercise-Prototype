@@ -90,21 +90,34 @@ console.log(personOne.stomach);
 function Car(model, milesPerGallon) {
   this.model = model;
   this.milesPerGallon = milesPerGallon;
-  this.tank = `tank`;
-  this.odometer = `odometer`;
+  this.tank = 0;
+  this.odometer = 0;
 }
 
 Car.prototype.fill = function(gallons) {
-  return this.tank = `tank at ${gallons}`
-}
+  this.tank += gallons;
+};
 
-const carOne = new Car(0, 0);
+const carOne = new Car("Ford", 10);
 
 console.log(carOne);
 
-carOne.fill(`17`);
+carOne.fill(17);
 
 console.log(carOne.tank);
+
+
+Car.prototype.drive = function(distance){
+ const drivableMiles = this.tank * this.milesPerGallon;
+ if(distance <= drivableMiles){
+   this.odometer = this.odometer + distance,
+   this.tank = this.tank - (distance / this.milesPerGallon);
+ }else{
+   this.odometer = this.odometer + drivableMiles;
+   this.tank = 0;
+   return `I ran out of fuel at ${this.odometer}`
+ }
+  }
 
 
 /*
@@ -157,10 +170,13 @@ console.log(liam.play());
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. When this is used in the global scope the value of this will be the window/console Object
-  2. when the .this calls a function the object before the . is this. - implicit bining
-  3. In new binding this refers to the object created in a constructor function. 
-  4. Whenever .call or .apply methods are used this is explicitly defind. 
+  1. Window binding - if none of the other rules apply, this will default to window unless we are in strict mode. 
+  2. Implicit binding - when the this calls a function the object before the "."" is this.
+  3. Explicit binding - .call, .apply . bind
+  .call - we pass in arguments 1 by 1 / immedicately invokes the function.
+  .apply - we pass in arguents as an array - immediately invokes a function.
+  .bind - we pass in arguments 1 by 1 - it does not immediately invoke the function, instead it returns a brand new function that can be invokes later. 
+  4. New binding - When a function is invoked as a constructor function using the new key word, this points to the new object that is created. 
 */
 
 
